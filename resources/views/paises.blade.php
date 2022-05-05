@@ -33,7 +33,7 @@
 </head>
 <body>
     <h1 class="h1">pais de la region</h1>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
