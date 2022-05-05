@@ -10,40 +10,60 @@
         .h1{
             text-transform: uppercase;
             margin: 50px 0px;
-           transform: translateX(38%);
+        }
+        .t{
+            font-weight: bold;
+        }
+        .text-pais{
+            color: red;
+        }
+        .text-capital{
+            color: #222D6F;
+        }
+        .text-moneda{
+            color: gray;
+        }
+        .text-poblacion{
+            color: #226F29;
+        }
+        .fondo-ciudad{
+            background: gainsboro;
         }
     </style>
 </head>
 <body>
     <h1 class="h1">pais de la region</h1>
-    <table class="table table-dark">
+    <table class="table">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>capital</th>
                 <th>Moneda</th>
                 <th>Poblacion</th>
+                <th>Ciudades</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($paises as $pai => $infopais)
                 <tr>
-                    <td>
+                    <td rowspan='{{count($infopais["ciudades"])}}' class="t text-pais">
                         {{$pai}}
                     </td>
-                    <td>
+                    <td  rowspan='{{count($infopais["ciudades"])}}' class="t text-capital">
                         {{$infopais["capital"]}}
                     </td>
-                    <td>
+                    <td  rowspan='{{count($infopais["ciudades"])}}' class="t text-moneda">
                         {{$infopais["moneda"]}}
                     </td>
-                    <td>
-                        {{$infopais["poblacion"]}}
+                    <td  rowspan='{{count($infopais["ciudades"])}}' class="t text-poblacion">
+                        {{$infopais["poblacion"]}} millones de habitantes
                     </td>
-                    <td>
-                        {{$infopais["poblacion"]}}
-                    </td>
+                    @foreach($infopais["ciudades"]  as $ciudad)
+                    <th class="fondo-ciudad">
+                        {{ $ciudad }}
+                    </th>
                 </tr>
+                @endforeach
             @endforeach
         </tbody>
         <tfoot></tfoot>
