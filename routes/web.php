@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,71 +16,90 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-//Ruta de arreglos:
+//Primera ruta
+Route::get('hola' , function(){
+    echo "Hola 2465903";
+});
+//Ruta de arreglos
 Route::get('arreglo' , function(){
-    $estudiantes =[ 
-        "CA" => 1, 
+    $estudiantes = [
+        "CA" => 1,
         "JO" => true,
-        "AN" =>1.78
+        "AN" => 1.78
     ];
-    
-    //recorrer el arreglo
+    //Recorrer el arreglo
     foreach($estudiantes as $e){
         echo $e."<hr />";
     }
-
-    //agregar elemento en PHP
-    $estudiantes[] = "Johan";
+    //Agregar elementos en PHP
+    $estudiantes["SE"] = "Sebastian";
+    echo "<pre>";
     var_dump($estudiantes);
+    echo "</pre>";
 });
-
-Route::get('paises', function(){
-    //arreglo paises
-    $paises = [
+Route::get('Paises', function(){
+    //Arreglo de paises
+    $Paises = [
         "Colombia" => [
-            "capital" => "Bogotá",
-            "moneda" => "Peso",
-            "poblacion" => 51,
-            "ciudades" => [
-                "Medellín",
+            "Capital"   => "Bogota",
+            "Moneda"    => "Peso",
+            "Poblacíon" => 51,
+            "Ciudades"  => [
+                "Medellin",
                 "Cali",
                 "Barranquilla"
             ]
         ],
         "Peru" => [
-            "capital" => "Lima",
-            "moneda" => "Sol",
-            "poblacion" => 32,
-            "ciudades" => [
+            "Capital"   => "Lima",
+            "Moneda"    => "Sol",
+            "Poblacíon" => 32,
+            "Ciudades"  => [
                 "Arequipa",
-                "Cusco"
+                "Trujillo",
+                "Chiclayo"
             ]
         ],
         "Paraguay" => [
-            "capital" => "Asunción",
-            "moneda" => "Guaraní paraguayo",
-            "poblacion" => 7,
-            "ciudades" => [
-                "Luque"
+            "Capital"   => "Asuncíon",
+            "Moneda"    => "Guaraní",
+            "Poblacíon" => 7,
+            "Ciudades"  => [
+                "Luque",
+                "San Lorenzo",
+                "Ciudad del Este"
             ]
         ],
-        "Francia" => [
-            "capital" => "Paris",
-            "moneda" => "Euro",
-            "poblacion" => 67
-        ],
         "Argentina" => [
-            "capital" => "Buenos Aires",
-            "moneda" => "Peso Argentino",
-            "poblacion" => 45
-
+            "Capital"   => "Buenos aires",
+            "Moneda"    => "Peso",
+            "Poblacíon" => 45,
+            "Ciudades"  => [
+                "Córdoba",
+                "Rosario",
+                "Mar del Plata"
+            ]
+        ],
+        "Ecuador" => [
+            "Capital"   => "Quito",
+            "Moneda"    => "Dolar",
+            "Poblacíon" => 17,
+            "Ciudades"  => [
+                "Guayaquil",
+                "Manta",
+                "Machala"
+            ]
         ]
     ];
-
-    //
-    
+    //Mostrar la vista
     return view('paises')
-    ->with("paises", $paises);
-
+        ->with("Paises", $Paises);
 });
+//Crear rutas 
+Route::get('prueba', function(){
+    return view('productos.new');
+});
+
+//rutas rest - resource
+Route::resource('producto' ,
+        ProductoController::class);
