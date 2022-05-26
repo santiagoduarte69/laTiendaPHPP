@@ -6,6 +6,7 @@ use App\Models\Marca;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
 {
@@ -30,7 +31,7 @@ class ProductoController extends Controller
         $marcas = Marca::all();
         //selección de todas las categorias
         $categorias = Categoria::all();
-        //mostrar la vista, 
+        //mostrar la vista,
         //con los marcas y categorias
         return view('productos.new')
                     ->with('marcas', $marcas)
@@ -44,9 +45,51 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+        //establecer reglas de validacion que apliquen a cada campo
+        $reglas =[
+            "nombre" => 'required|alpha',
+            "desc" => 'required|min:20|max:50',
+            "precio" => 'required|numeric',
+            "marca" => 'required'
+        ];
+
+        //mensajes:
+        $mensajes = [
+            "required" => "campo obligatorio",
+            "alpha" => "solo letras",
+            "min" => "minimo 20 caracteres",
+            "max" => "maximo 50 caracteres",
+            "numeric" => "solo numeros"
+        ];
+
+        //crear el objeto validador
+        $v = Validator::make($r->all() , $reglas, $mensajes);
+        //3.
+        //validar la input data
+        if($v->fails()){
+            //validación fallida
+            //redireccionar al formulario
+            return redirect('producto/create')
+                    ->withErrors($v)
+                    ->withInput();
+        }else{
+            //validación correcta
+            $p = new Producto;
+            // asignamos valores a los atributos del producto
+            $p->nombre = $r->nombre;
+            $p->desc = $r->desc;
+            $p->precio = $r->precio;
+            $p->categoria_id = $r->categoria;
+            $p->marca_id = $r->marca;
+
+            //guardar en db
+            $p->save();
+            return redirect('producto/create')
+                ->with('mensajito', "producto registrado");
+        }
+
     }
 
     /**

@@ -9,12 +9,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <nav class="blue darken-4">
+  <nav class="orange darken-4">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><i class="material-icons">store_mall_directory</i>LaTiendaPHP</a>
+      <a href="#" class="brand-logo">LaTiendaPHP</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="sass.html">Productos</a></li>
-        <li><a href="badges.html">Pedidos</a></li>
       </ul>
     </div>
   </nav>
