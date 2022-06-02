@@ -1,9 +1,8 @@
-<head>
 @extends('layouts.menu')
 @section('contenido')
 @if(session('mensajito'))
 <div class="row">
-    <span>{{session('mensajito')}}</span>
+    <center><span  class="red-text text-darken-2" style="text-transform: uppercase;">{{session('mensajito')}}</span></center>
 </div>
 @endif
 <div class="row">
