@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,7 +96,7 @@ Route::get('Paises', function(){
     return view('paises')
         ->with("Paises", $Paises);
 });
-//Crear rutas 
+//Crear rutas
 Route::get('prueba', function(){
     return view('productos.new');
 });
@@ -103,3 +104,13 @@ Route::get('prueba', function(){
 //rutas rest - resource
 Route::resource('producto' ,
         ProductoController::class);
+
+Route::resource('carrito' ,
+        CartController::class,
+        [
+            'only' => [
+                'store',
+                'index',
+                'destroy'
+            ]
+        ]);

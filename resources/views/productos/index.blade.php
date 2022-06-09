@@ -24,7 +24,7 @@
 
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{ $producto->nombre }}<i class="material-icons right">more_vert</i></span>
-                <p><a href="#">Ver detalles</a></p>
+                <p><a href="{{ url('producto/'.$producto->id) }}">Ver detalles</a></p>
             </div>
 
             <div class="card-reveal">
@@ -32,6 +32,8 @@
                 <ul>
                     <li><span>Descripcion: </span>{{ $producto->desc }}</li>
                     <li><span>Precio: </span>{{ $producto->precio }}</li>
+                    <li><span>Categoria: </span>{{ $producto->categoria->nombre }}</li>
+                    <li><span>Marca: </span>{{ $producto->marca->nombre }}</li>
                 </ul>
             </div>
 

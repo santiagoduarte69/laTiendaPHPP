@@ -116,9 +116,13 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show($producto)
     {
-        echo "aqui van los detalles de producto con id: $producto ";
+        // Seleccionar el producto por id
+        $producto = Producto::find($producto);
+
+        // Mostrar la vista de detalles llevandole el producto seleccionado
+        return view('productos.show')->with('producto', $producto);
     }
 
     /**
